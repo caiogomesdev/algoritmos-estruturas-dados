@@ -112,6 +112,17 @@ class BinarySearchThree {
       callback(node.key);
     }
   }
+
+  min() {
+    if (this.root.left) {
+      let current = this.root;
+      while (current && current.left) {
+        current = current.left;
+      }
+      return current;
+    }
+    return this.root.value;
+  }
 }
 
 const three = new BinarySearchThree();
@@ -155,4 +166,6 @@ const callback = (key) => console.log(key);
  * Percorrendo uma árvore em percurso pós-ordem
  * Um percurso pós-ordem visita o nó depois de visitar os seus decendentes.
  */
-three.postOrderTraverse(callback);
+// three.postOrderTraverse(callback);
+
+console.log(three.min());

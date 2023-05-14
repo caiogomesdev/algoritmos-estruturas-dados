@@ -1,0 +1,11 @@
+{
+  "name": "estruturas-dados",
+  "version": "1.0.0",
+  "description": "---",
+  "main": "binary-three-search.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
