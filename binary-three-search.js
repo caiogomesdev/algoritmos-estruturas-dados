@@ -77,16 +77,42 @@ class BinarySearchThree {
     return this.searchNode(node.left, key);
   }
 
+  inOrderTraverse(callback) {
+    this.inOrderTraverseNode(this.root, callback);
+  }
+
+  inOrderTraverseNode(node, callback) {
+    if (node) {
+      this.inOrderTraverseNode(node.left, callback);
+      callback(node.value);
+      this.inOrderTraverseNode(node.right, callback);
+    }
+  }
+
   checkNode() {}
 }
 
-const binarySearchThree = new BinarySearchThree();
+const three = new BinarySearchThree();
 
-binarySearchThree.insert(10);
-binarySearchThree.insert(11);
-binarySearchThree.insert(12);
-binarySearchThree.insert(9);
+// Inserindo em uma árvore binária
+three.insert(10);
+three.insert(11);
+three.insert(13);
+three.insert(12);
+three.insert(7);
+three.insert(3);
+three.insert(8);
 
-console.log(binarySearchThree.search(91));
+/**
+ *                                    10
+ *                                7       11
+ *                             3    8  12    13
+ */
 
+// Pesquisando em uma árvore binária
+// console.log(three.search(91));
 // O(log n) n 1/2
+
+// Percorrendo uma árvore em percurso em-ordem
+// Visita todos os nós de uma BST( Binary search Three) de forma crescente. Ou seja, do menor para o maior.
+three.inOrderTraverse((key) => console.log(key));
