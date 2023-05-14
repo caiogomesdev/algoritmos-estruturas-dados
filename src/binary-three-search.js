@@ -22,11 +22,6 @@ class ThreeNode {
 
 class BinarySearchThree {
   root = null;
-  compareFn = null;
-
-  constructor(compareFn = null) {
-    this.compareFn = compareFn;
-  }
 
   /**
    * esse método insere uma nova chave na árvore
@@ -123,6 +118,17 @@ class BinarySearchThree {
     }
     return this.root.value;
   }
+
+  max() {
+    if (this.root.right) {
+      let current = this.root;
+      while (current && current.right) {
+        current = current.right;
+      }
+      return current;
+    }
+    return this.root.value;
+  }
 }
 
 const three = new BinarySearchThree();
@@ -168,4 +174,8 @@ const callback = (key) => console.log(key);
  */
 // three.postOrderTraverse(callback);
 
-console.log(three.min());
+// A valor mínimo está no nó mais à esquerda no último nível da árvore.
+// console.log(three.min());
+
+// A valor máximo está no nó mais à direita no último nível da árvore.
+console.log(three.max());
