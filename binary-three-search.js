@@ -13,10 +13,10 @@
 class ThreeNode {
   left = null;
   right = null;
-  value = null;
+  key = null;
 
   constructor(key) {
-    this.value = key;
+    this.key = key;
   }
 }
 
@@ -41,8 +41,8 @@ class BinarySearchThree {
   }
 
   insertNode(node, key) {
-    if (node?.value) {
-      if (node.value < key) {
+    if (node?.key) {
+      if (node.key < key) {
         if (node.right) {
           this.insertNode(node.right, key);
           return;
@@ -65,13 +65,13 @@ class BinarySearchThree {
   }
 
   searchNode(node, key) {
-    if (!node || !node.value) {
+    if (!node || !node.key) {
       return false;
     }
-    if (node.value === key) {
+    if (node.key === key) {
       return true;
     }
-    if (key > node.value) {
+    if (key > node.key) {
       return this.searchNode(node.right, key);
     }
     return this.searchNode(node.left, key);
@@ -84,12 +84,34 @@ class BinarySearchThree {
   inOrderTraverseNode(node, callback) {
     if (node) {
       this.inOrderTraverseNode(node.left, callback);
-      callback(node.value);
+      callback(node.key);
       this.inOrderTraverseNode(node.right, callback);
     }
   }
 
-  checkNode() {}
+  preOrderTraverse(callback) {
+    this.preOrderTraverseNode(this.root, callback);
+  }
+
+  preOrderTraverseNode(node, callback) {
+    if (node) {
+      callback(node.key);
+      this.preOrderTraverseNode(node.left, callback);
+      this.preOrderTraverseNode(node.right, callback);
+    }
+  }
+
+  postOrderTraverse(callback) {
+    this.postOrderTraverseNode(this.root, callback);
+  }
+
+  postOrderTraverseNode(node, callback) {
+    if (node) {
+      this.postOrderTraverseNode(node.left, callback);
+      this.postOrderTraverseNode(node.right, callback);
+      callback(node.key);
+    }
+  }
 }
 
 const three = new BinarySearchThree();
@@ -106,13 +128,31 @@ three.insert(8);
 /**
  *                                    10
  *                                7       11
- *                             3    8  12    13
+ *                             3    8        13
+ *                                        12
  */
 
 // Pesquisando em uma árvore binária
 // console.log(three.search(91));
 // O(log n) n 1/2
 
-// Percorrendo uma árvore em percurso em-ordem
-// Visita todos os nós de uma BST( Binary search Three) de forma crescente. Ou seja, do menor para o maior.
-three.inOrderTraverse((key) => console.log(key));
+const callback = (key) => console.log(key);
+
+/**
+ * Percorrendo uma árvore em percurso em-ordem
+ * Visita todos os nós de uma BST( Binary search Three) de forma crescente. Ou seja, do menor para o maior.
+ * */
+// three.inOrderTraverse(callback);
+
+/**
+ * Percorrendo uma árvore em percurso pré-ordem
+ * A diferença entre os percursos em-ordem e pré-ordem é que o percurso pré-ordem
+ * visita o nó raiz antes, depois o nó da esquerda e, por fim, o nó da direita
+ * */
+// three.preOrderTraverse(callback);
+
+/**
+ * Percorrendo uma árvore em percurso pós-ordem
+ * Um percurso pós-ordem visita o nó depois de visitar os seus decendentes.
+ */
+three.postOrderTraverse(callback);
